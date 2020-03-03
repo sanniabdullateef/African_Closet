@@ -13,6 +13,20 @@ class InfoProvider extends Component {
         reviews: reviews,
         detailInfo: detailInfo,
         news: news
+    };
+
+    getItem = id => {
+        const item = this.state.info.find(item => item.id ===id);
+        return item
+    }
+
+    handleDetail = id => {
+        const item = this.getItem(id);
+        this.setState(()=>{
+            return {
+                detailInfo: item
+            }
+        })
     }
 
 
@@ -21,8 +35,15 @@ class InfoProvider extends Component {
             <InfoContext.Provider value={{
                 info:this.state.info,
                 reviews: this.state.reviews,
+                maps:this.state.maps,
+                headerTitle: this.state.headerTitle,
+                headerSubTitle: this.state.headerSubTitle,
+                headerText: this.state.headerText,
                 detailInfo: this.state.detailInfo,
                 news: this.state.news,
+                name: this.state.name,
+                comment: this.state.comment,
+                handleDetail:this.handleDetail
             }}>
                 {this.props.children}
             </InfoContext.Provider>
